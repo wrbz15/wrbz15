@@ -25,11 +25,6 @@ cover:
     relative: false
 ---
 
-* Buffer Pool
-* Change Buffer
-* 自适应哈希索引
-* Log BuFFer
-
 #### Buffer Pool
 
 缓冲池是主存储器中的一个区域，用于在访问时缓存表和索引数据。 缓冲池允许直接从内存处理常用数据，从而加快处理速度。 在专用服务器上，通常会将最多80％的物理内存分配给缓冲池。
