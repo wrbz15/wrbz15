@@ -25,11 +25,11 @@ cover:
     relative: false
 ---
 
-#### InnoDB简介
+## InnoDB简介
 
 `InnoDB` 是一种平衡高可靠性和高性能的通用存储引擎。 在MySQL 8.0中， `InnoDB` 是默认的MySQL存储引擎。 除非您配置了不同的默认存储引擎，否则发出 [`CREATE TABLE`](http://www.deituicms.com/mysql8cn/cn/sql-syntax.html#create-table) 不带 `ENGINE=` 子句的语句会创建 `InnoDB` 表。
 
-#### innoDB优点
+## innoDB优点
 
 - 如果您的服务器因硬件或软件问题而崩溃，无论当时数据库中发生了什么，您都无需在重新启动数据库后执行任何特殊操作。 `InnoDB` [崩溃恢复会 ](http://www.deituicms.com/mysql8cn/cn/glossary.html#glos_crash_recovery)自动完成在崩溃之前提交的所有更改，并撤消正在进行但未提交的任何更改。 只需重新启动并继续您离开的地方。
 - 该 `InnoDB` 存储引擎维护它自己的 [缓冲池 ](http://www.deituicms.com/mysql8cn/cn/glossary.html#glos_buffer_pool)，当数据被访问主内存中缓存表和索引数据。 经常使用的数据直接从内存中处理。 此缓存适用于许多类型的信息并加快处理速度。 在专用数据库服务器上，通常会将最多80％的物理内存分配给缓冲池。
@@ -48,7 +48,7 @@ cover:
 - `InnoDB` 专为处理大量数据时的CPU效率和最高性能而设计。
 - `InnoDB` 表可以处理大量数据，即使在文件大小限制为2GB的操作系统上也是如此。
 
-#### innoDB架构
+## innoDB架构
 
 ![InnoDB architecture diagram showing in-memory and on-disk structures.](http://www.deituicms.com/mysql8cn/cn/images/innodb-architecture.png)
 
