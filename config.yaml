@@ -3,7 +3,8 @@ title: "往日不再"
 paginate: 5
 theme: PaperMod
 searchHidden: true
-
+googleAnalytics: "G-6XZRTH2116"    
+disqusShortname: disqus_yv6xaK07fD
 enableInlineShortcodes: true
 enableEmoji: true # 允许使用 Emoji 表情，建议 true
 enableRobotsTXT: true # 允许爬虫抓取到搜索引擎，建议 true
@@ -46,9 +47,7 @@ languages:
         imageWidth: 150
         imageHeight: 150
         buttons:
-          - name: 👨🏻‍💻技术
-            url: posts/tech
-          - name: 📕笔记
+          - name: 📕文章
             url: posts/note
           - name: 🏖算法
             url: posts/algorithm
@@ -96,6 +95,8 @@ params:
     ShowWordCounts: true
     VisitCount: true
     ShowLastMod: true #显示文章更新时间
+    ShowShareButtons: true
+    ShowReadingTime: true
     ShowToc: true # 显示目录
     TocOpen: true # 自动展开目录
     comments: true
@@ -110,7 +111,7 @@ params:
         text: "wrbz15's Blog"      
     analytics:
         google:
-            SiteVerificationTag: ""        
+            SiteVerificationTag: "G-6XZRTH2116"        
     fuseOpts:
         isCaseSensitive: false
         shouldSort: true
