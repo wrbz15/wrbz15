@@ -47,10 +47,12 @@ languages:
         imageWidth: 150
         imageHeight: 150
         buttons:
-          - name: 📕文章
-            url: posts/note
-          - name: 🏖算法
-            url: posts/algorithm
+          - name: 📚文章
+            url: posts
+          - name: 🔍搜索
+            url: search  
+          - name: 🔖标签
+            url: tags 
       menu:
         main:
           - identifier: search
