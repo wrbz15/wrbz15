@@ -63,7 +63,7 @@ languages:
             weight: 1
           - identifier: home
             name: 🏠主页
-            url: wrbz15/
+            url: 
             weight: 2
           - identifier: posts
             name: 📚文章
