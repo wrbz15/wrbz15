@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>MYSQL架构 | 往日不再</title>
+<meta name="keywords" content="数据库, MYSQL">
+<meta name="description" content="服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS">
+<meta name="author" content="wrbz15">
+<link rel="canonical" href="https://wrbz15.github.io/hugo-PaperMod/posts/note/mysql%E6%9E%B6%E6%9E%84/">
+<link crossorigin="anonymous" href="/hugo-PaperMod/assets/css/stylesheet.bc1149f4a72aa4858d3a9f71462f75e5884ffe8073ea9d6d5761d5663d651e20.css" integrity="sha256-vBFJ9KcqpIWNOp9xRi915YhP/oBz6p1tV2HVZj1lHiA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/hugo-PaperMod/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://wrbz15.github.io/hugo-PaperMod/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://wrbz15.github.io/hugo-PaperMod/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://wrbz15.github.io/hugo-PaperMod/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://wrbz15.github.io/hugo-PaperMod/apple-touch-icon.png">
+<link rel="mask-icon" href="https://wrbz15.github.io/hugo-PaperMod/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="MYSQL架构" />
+<meta property="og:description" content="服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wrbz15.github.io/hugo-PaperMod/posts/note/mysql%E6%9E%B6%E6%9E%84/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-20T19:17:58&#43;08:00" />
+<meta property="article:modified_time" content="2023-01-27T19:17:58&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MYSQL架构"/>
+<meta name="twitter:description" content="服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "📚文章",
+      "item": "https://wrbz15.github.io/hugo-PaperMod/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "👨🏻‍💻 笔记",
+      "item": "https://wrbz15.github.io/hugo-PaperMod/posts/note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "MYSQL架构",
+      "item": "https://wrbz15.github.io/hugo-PaperMod/posts/note/mysql%E6%9E%B6%E6%9E%84/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MYSQL架构",
+  "name": "MYSQL架构",
+  "description": "服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS",
+  "keywords": [
+    "数据库", "MYSQL"
+  ],
+  "articleBody": "服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）。\n大体来说， MySQL 可以分为 Server 层和存储引擎层两部分。\nServer 层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。\n而存储引擎层负责数据的存储和提取。其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。 现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎。\n连接器 连接器负责跟客户端建立连接、获取权限、维持和管理连接。\n建立链接方式有： TCP/IP、命名管道或共享内存、Unix域套接字等。\n建立连接后MySQL服务器会为每一个连接进来的客户端分配一个线程。\n用户名密码认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。\n连接使用的方式有：长连接、短连接\n短连接缺点：建立连接的过程成本较高\n长连接缺点：MySQL 在执行过程中临时使用的内存是管理在连接对象里面的，这些资源会在连接断开的时候才释放。（解决方案：mysql_reset_connection\n查询缓存 MySQL服务器程序处理查询请求的过程也是这样，会把刚刚处理过的查询请求和结果缓存起来\n使用限制：\nMySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了INSERT、 UPDATE、DELETE、TRUNCATE TABLE、ALTER TABLE、DROP TABLE或 DROP DATABASE语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！ 如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。 如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存。 分析器 分析器先会做“词法分析”。你输入的是由多个字符串和空格组成的一条 SQL 语句， MySQL 需要识别出里面的字符串分别是什么，代表什么。\n做完了这些识别以后，就要做“语法分析”。 根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL 语句是否满足 MySQL 语法。\n优化器 优化器是在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。\n执行器 执行器阶段，开始执行语句。\n首先会判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误；\n打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口\ntips: rows_examined是执行器每次调用引擎获取数据行的时候累加的\n",
+  "wordCount" : "1213",
+  "inLanguage": "en",
+  "datePublished": "2023-01-20T19:17:58+08:00",
+  "dateModified": "2023-01-27T19:17:58+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "wrbz15"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://wrbz15.github.io/hugo-PaperMod/posts/note/mysql%E6%9E%B6%E6%9E%84/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "往日不再",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://wrbz15.github.io/hugo-PaperMod/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://wrbz15.github.io/hugo-PaperMod/" accesskey="h" title="wrbz15&#39;s Blog (Alt + H)">wrbz15&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://wrbz15.github.io/hugo-PaperMod/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://wrbz15.github.io/hugo-PaperMod/">Home</a>&nbsp;»&nbsp;<a href="https://wrbz15.github.io/hugo-PaperMod/posts/">📚文章</a>&nbsp;»&nbsp;<a href="https://wrbz15.github.io/hugo-PaperMod/posts/note/">👨🏻‍💻 笔记</a></div>
+    <h1 class="post-title">
+      MYSQL架构
+    </h1>
+    <div class="post-meta"><span title='2023-01-20 19:17:58 +0800 CST'>2023-01-20</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;wrbz15
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%a4%84%e7%90%86%e5%ae%a2%e6%88%b7%e7%ab%af%e6%9f%a5%e8%af%a2%e8%af%b7%e6%b1%82%e6%b5%81%e7%a8%8b" aria-label="服务器处理客户端查询请求流程">服务器处理客户端查询请求流程</a><ul>
+                        
+                <li>
+                    <a href="#%e8%bf%9e%e6%8e%a5%e5%99%a8" aria-label="连接器">连接器</a></li>
+                <li>
+                    <a href="#%e6%9f%a5%e8%af%a2%e7%bc%93%e5%ad%98" aria-label="查询缓存">查询缓存</a></li>
+                <li>
+                    <a href="#%e5%88%86%e6%9e%90%e5%99%a8" aria-label="分析器">分析器</a></li>
+                <li>
+                    <a href="#%e4%bc%98%e5%8c%96%e5%99%a8" aria-label="优化器">优化器</a></li>
+                <li>
+                    <a href="#%e6%89%a7%e8%a1%8c%e5%99%a8" aria-label="执行器">执行器</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="服务器处理客户端查询请求流程">服务器处理客户端查询请求流程<a hidden class="anchor" aria-hidden="true" href="#服务器处理客户端查询请求流程">#</a></h2>
+<p>不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）。</p>
+<p><img loading="lazy" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctbXkuY3Nkbi5uZXQvdXBsb2Fkcy8yMDEyMTEvMTUvMTM1Mjk1OTg0N185MTQ3LmpwZw?x-oss-process=image/format,png" alt="mysql架构图"  />
+</p>
+<p>大体来说， MySQL 可以分为 Server 层和存储引擎层两部分。</p>
+<p>Server 层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。</p>
+<p>而存储引擎层负责数据的存储和提取。其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。 现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎。</p>
+<h3 id="连接器">连接器<a hidden class="anchor" aria-hidden="true" href="#连接器">#</a></h3>
+<p>连接器负责跟客户端建立连接、获取权限、维持和管理连接。</p>
+<p>建立链接方式有： TCP/IP<code>、</code>命名管道或共享内存<code>、</code>Unix域套接字等。</p>
+<p>建立连接后MySQL服务器会为每一个连接进来的客户端分配一个线程。</p>
+<p>用户名密码认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。</p>
+<p>连接使用的方式有：长连接、短连接</p>
+<p>短连接缺点：建立连接的过程成本较高</p>
+<p>长连接缺点：MySQL 在执行过程中临时使用的内存是管理在连接对象里面的，这些资源会在连接断开的时候才释放。（解决方案：mysql_reset_connection</p>
+<h3 id="查询缓存">查询缓存<a hidden class="anchor" aria-hidden="true" href="#查询缓存">#</a></h3>
+<p><code>MySQL</code>服务器程序处理查询请求的过程也是这样，会把刚刚处理过的查询请求和结果<code>缓存</code>起来</p>
+<p>使用限制：</p>
+<ol>
+<li>MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了<code>INSERT</code>、 <code>UPDATE</code>、<code>DELETE</code>、<code>TRUNCATE TABLE</code>、<code>ALTER TABLE</code>、<code>DROP TABLE</code>或 <code>DROP DATABASE</code>语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！</li>
+<li>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。</li>
+<li>如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存。</li>
+</ol>
+<h3 id="分析器">分析器<a hidden class="anchor" aria-hidden="true" href="#分析器">#</a></h3>
+<p>分析器先会做“词法分析”。你输入的是由多个字符串和空格组成的一条 SQL 语句， MySQL 需要识别出里面的字符串分别是什么，代表什么。</p>
+<p>做完了这些识别以后，就要做“语法分析”。 根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL 语句是否满足 MySQL 语法。</p>
+<h3 id="优化器">优化器<a hidden class="anchor" aria-hidden="true" href="#优化器">#</a></h3>
+<p>优化器是在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。</p>
+<h3 id="执行器">执行器<a hidden class="anchor" aria-hidden="true" href="#执行器">#</a></h3>
+<p>执行器阶段，开始执行语句。</p>
+<ol>
+<li>
+<p>首先会判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误；</p>
+</li>
+<li>
+<p>打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口</p>
+</li>
+</ol>
+<p>tips: rows_examined是执行器每次调用引擎获取数据行的时候累加的</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://wrbz15.github.io/hugo-PaperMod/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li>
+      <li><a href="https://wrbz15.github.io/hugo-PaperMod/tags/mysql/">MYSQL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://wrbz15.github.io/hugo-PaperMod/posts/note/innodb%E6%9E%B6%E6%9E%84/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>InnoDB架构</span>
+  </a>
+  <a class="next" href="https://wrbz15.github.io/hugo-PaperMod/posts/note/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/">
+    <span class="title">Next »</span>
+    <br>
+    <span>代码的坏味道</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://wrbz15.github.io/hugo-PaperMod/">往日不再</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
