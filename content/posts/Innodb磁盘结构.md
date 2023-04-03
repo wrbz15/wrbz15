@@ -1,5 +1,5 @@
 ---
-title: "Innodb磁盘结构"
+title: "inodb磁盘结构"
 date: 2023-01-29T19:28:58+08:00
 author: ["wrbz15"]
 categories: 
@@ -26,7 +26,7 @@ typora-root-url: ../../static
 ---
 ### innodb逻辑存储结构
 
-![innodb逻辑存储结构](/image/innodb逻辑存储结构.png)
+![innodb逻辑存储结构](/images/innodb_logic_store.png "innodb逻辑存储结构")
 
 ### Table&Tablespaces
 
