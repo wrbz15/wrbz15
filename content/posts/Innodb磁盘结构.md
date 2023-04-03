@@ -26,7 +26,7 @@ typora-root-url: ../../static
 ---
 ### innodb逻辑存储结构
 
-![innodb逻辑存储结构](/images/innodb_logic_store.png "innodb逻辑存储结构")
+![innodb逻辑存储结构](/../images/innodb_logic_store.png "innodb逻辑存储结构")
 
 ### Table&Tablespaces
 

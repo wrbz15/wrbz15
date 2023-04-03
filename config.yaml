@@ -122,17 +122,15 @@ params:
         threshold: 1
         minMatchCharLength: 0
         keys: ["title", "permalink", "summary"]
-
     twikoo:
       version: 1.4.11
+    staticDir: "static"
 
 taxonomies:
     category: categories
     tag: tags
     series: series
 
-staticDir:
-    - static
 
 markup:
     goldmark:

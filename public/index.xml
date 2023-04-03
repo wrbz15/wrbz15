@@ -2,88 +2,88 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>往日不再</title>
-    <link>https://wrbz15.github.io/hugo-PaperMod/</link>
+    <link>https://wrbz15.github.io/wrbz15/</link>
     <description>Recent content on 往日不再</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 29 Jan 2023 19:28:58 +0800</lastBuildDate><atom:link href="https://wrbz15.github.io/hugo-PaperMod/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Jan 2023 19:28:58 +0800</lastBuildDate><atom:link href="https://wrbz15.github.io/wrbz15/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>inodb磁盘结构</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</link>
       <pubDate>Sun, 29 Jan 2023 19:28:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</guid>
       <description>innodb逻辑存储结构 Table&amp;amp;Tablespaces 索引组织表</description>
     </item>
     
     <item>
       <title>InnoDB内存中结构</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</guid>
       <description>Buffer Pool 缓冲池是主存储器中的一个区域，用于在访问时缓存表和索引数据。 缓冲池允许直接从内存处理常用数据，从而加快处理速度。 在专用服务器上，通常会将</description>
     </item>
     
     <item>
       <title>InnoDB架构</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E6%9E%B6%E6%9E%84/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/innodb%E6%9E%B6%E6%9E%84/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E6%9E%B6%E6%9E%84/</guid>
       <description>InnoDB简介 InnoDB 是一种平衡高可靠性和高性能的通用存储引擎。 在MySQL 8.0中， InnoDB 是默认的MySQL存储引擎。 除非您配置了不同的默认存储引</description>
     </item>
     
     <item>
       <title>MYSQL架构</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/mysql%E6%9E%B6%E6%9E%84/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/mysql%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/mysql%E6%9E%B6%E6%9E%84/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/mysql%E6%9E%B6%E6%9E%84/</guid>
       <description>服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS</description>
     </item>
     
     <item>
       <title>代码的坏味道</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/</link>
       <pubDate>Sat, 27 Aug 2022 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/</guid>
       <description>代码的坏味道会告诉你一些迹象，它会指出“这里有一个可以用重构解决的问题”。 神秘命名（Mysterious Name） 表现：难以理解实际的功能和</description>
     </item>
     
     <item>
       <title>构筑测试体系</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/%E6%9E%84%E7%AD%91%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/%E6%9E%84%E7%AD%91%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB/</link>
       <pubDate>Sat, 27 Aug 2022 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/%E6%9E%84%E7%AD%91%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/%E6%9E%84%E7%AD%91%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB/</guid>
       <description>编写未臻完善的测试并经常运行，好过对完美测试的无尽等待。 测试的目标 测试应该是一种风险驱动的行为，我测试的目标是希望找出现在或未来可能出现的 b</description>
     </item>
     
     <item>
       <title>重构的原则</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E5%8E%9F%E5%88%99/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E5%8E%9F%E5%88%99/</link>
       <pubDate>Sat, 27 Aug 2022 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E5%8E%9F%E5%88%99/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E5%8E%9F%E5%88%99/</guid>
       <description>重构的定义 重构（名词）：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。 重构（动词）：使用一</description>
     </item>
     
     <item>
       <title>重构的方法论</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <link>https://wrbz15.github.io/wrbz15/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
       <pubDate>Sat, 27 Aug 2022 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/posts/%E9%87%8D%E6%9E%84%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
       <description>重构的记录格式 介绍重构时，我采用一种标准格式。每个重构手法都有如下 5 个部分。 首先是名称（name）。要建造一个重构词汇表，名称是很重要的。这</description>
     </item>
     
     <item>
       <title>🙋🏻‍♂️关于</title>
-      <link>https://wrbz15.github.io/hugo-PaperMod/about/</link>
+      <link>https://wrbz15.github.io/wrbz15/about/</link>
       <pubDate>Sat, 27 Aug 2022 14:57:28 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/hugo-PaperMod/about/</guid>
+      <guid>https://wrbz15.github.io/wrbz15/about/</guid>
       <description>关于我 职业: 程序员</description>
     </item>
     
