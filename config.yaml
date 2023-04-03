@@ -1,4 +1,5 @@
-baseURL: "https://wrbz15.github.io/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
+baseURL: "/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
+relativeURLs: true
 title: "往日不再"
 paginate: 5
 theme: PaperMod
@@ -10,7 +11,7 @@ enableEmoji: true # 允许使用 Emoji 表情，建议 true
 enableRobotsTXT: true # 允许爬虫抓取到搜索引擎，建议 true
 
 hasCJKLanguage: true # 自动检测是否包含 中文日文韩文 如果文章中使用了很多中文引号的话可以开启
-relativeURLs: true
+
 buildDrafts: false
 buildFuture: false
 buildExpired: false

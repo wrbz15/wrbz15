@@ -2,43 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>数据库 on 往日不再</title>
-    <link>https://wrbz15.github.io/wrbz15/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <link>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <description>Recent content in 数据库 on 往日不再</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 29 Jan 2023 19:28:58 +0800</lastBuildDate><atom:link href="https://wrbz15.github.io/wrbz15/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Jan 2023 19:28:58 +0800</lastBuildDate><atom:link href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>inodb磁盘结构</title>
-      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</link>
+      <link>/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</link>
       <pubDate>Sun, 29 Jan 2023 19:28:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</guid>
+      <guid>/posts/innodb%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84/</guid>
       <description>innodb逻辑存储结构 Table&amp;amp;Tablespaces 索引组织表</description>
     </item>
     
     <item>
       <title>InnoDB内存中结构</title>
-      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</link>
+      <link>/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</guid>
+      <guid>/posts/innodb%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</guid>
       <description>Buffer Pool 缓冲池是主存储器中的一个区域，用于在访问时缓存表和索引数据。 缓冲池允许直接从内存处理常用数据，从而加快处理速度。 在专用服务器上，通常会将</description>
     </item>
     
     <item>
       <title>InnoDB架构</title>
-      <link>https://wrbz15.github.io/wrbz15/posts/innodb%E6%9E%B6%E6%9E%84/</link>
+      <link>/posts/innodb%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/wrbz15/posts/innodb%E6%9E%B6%E6%9E%84/</guid>
+      <guid>/posts/innodb%E6%9E%B6%E6%9E%84/</guid>
       <description>InnoDB简介 InnoDB 是一种平衡高可靠性和高性能的通用存储引擎。 在MySQL 8.0中， InnoDB 是默认的MySQL存储引擎。 除非您配置了不同的默认存储引</description>
     </item>
     
     <item>
       <title>MYSQL架构</title>
-      <link>https://wrbz15.github.io/wrbz15/posts/mysql%E6%9E%B6%E6%9E%84/</link>
+      <link>/posts/mysql%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Fri, 20 Jan 2023 19:17:58 +0800</pubDate>
       
-      <guid>https://wrbz15.github.io/wrbz15/posts/mysql%E6%9E%B6%E6%9E%84/</guid>
+      <guid>/posts/mysql%E6%9E%B6%E6%9E%84/</guid>
       <description>服务器处理客户端查询请求流程 不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MyS</description>
     </item>
     
